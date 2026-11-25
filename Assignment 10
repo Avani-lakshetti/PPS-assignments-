@@ -1,0 +1,134 @@
+#include <stdio.h>
+
+int main()
+{
+    int year, month, days, day, i;
+    int firstDay;
+
+    printf("Enter year: ");
+    scanf("%d", &year);
+
+    // Check leap year
+    if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0))
+    {
+        days = 29;
+    }
+    else
+    {
+        days = 28;
+    }
+
+    // Calculate the first day of the year
+    firstDay = 1;
+
+    for (i = 1900; i < year; i++)
+    {
+        if ((i % 400 == 0) || (i % 4 == 0 && i % 100 != 0))
+        {
+            firstDay = firstDay + 2;
+        }
+        else
+        {
+            firstDay = firstDay + 1;
+        }
+
+        firstDay = firstDay % 7;
+    }
+
+    // Print calendar month by month
+    for (month = 1; month <= 12; month++)
+    {
+        printf("\n\n");
+
+        switch (month)
+        {
+            case 1:
+                printf("        January %d\n", year);
+                days = 31;
+                break;
+
+            case 2:
+                printf("        February %d\n", year);
+
+                if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0))
+                    days = 29;
+                else
+                    days = 28;
+
+                break;
+
+            case 3:
+                printf("        March %d\n", year);
+                days = 31;
+                break;
+
+            case 4:
+                printf("        April %d\n", year);
+                days = 30;
+                break;
+
+            case 5:
+                printf("        May %d\n", year);
+                days = 31;
+                break;
+
+            case 6:
+                printf("        June %d\n", year);
+                days = 30;
+                break;
+
+            case 7:
+                printf("        July %d\n", year);
+                days = 31;
+                break;
+
+            case 8:
+                printf("        August %d\n", year);
+                days = 31;
+                break;
+
+            case 9:
+                printf("        September %d\n", year);
+                days = 30;
+                break;
+
+            case 10:
+                printf("        October %d\n", year);
+                days = 31;
+                break;
+
+            case 11:
+                printf("        November %d\n", year);
+                days = 30;
+                break;
+
+            case 12:
+                printf("        December %d\n", year);
+                days = 31;
+                break;
+        }
+
+        printf("Sun Mon Tue Wed Thu Fri Sat\n");
+
+        for (day = 0; day < firstDay; day++)
+        {
+            printf("    ");
+        }
+
+        for (day = 1; day <= days; day++)
+        {
+            printf("%3d ", day);
+
+            if ((day + firstDay) % 7 == 0)
+            {
+                printf("\n");
+            }
+        }
+
+        printf("\n");
+
+        firstDay = (firstDay + days) % 7;
+    }
+
+    return 0;
+}
